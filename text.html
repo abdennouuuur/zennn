@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are You Aya?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        .hidden {
+            display: none;
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff69b4;
+            color: white;
+        }
+        .bigger {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="question">
+        <h1>Are you Aya?</h1>
+        <button class="button" onclick="handleYesClick()">Yes, I'm the gorgeous Aya</button>
+        <button class="button" onclick="handleNoClick()">No, but I'm better than Aya</button>
+    </div>
+
+    <div id="response" class="hidden">
+        <img id="dogImage" src="" alt="Dog Image" style="width: 200px; height: 200px;">
+        <h2 id="responseText"></h2>
+        <div id="nextStep" class="hidden">
+            <p id="nextText">Can I ask youuu?</p>
+            <button class="button" onclick="handleSureClick()">Sure</button>
+        </div>
+    </div>
+
+    <script>
+        function handleYesClick() {
+            document.getElementById('question').classList.add('hidden');
+            document.getElementById('dogImage').src = 'https://example.com/happy-puppy.jpg'; // Replace with actual URL
+            document.getElementById('responseText').innerText = 'Welcomeee';
+            document.getElementById('response').classList.remove('hidden');
+            document.getElementById('nextStep').classList.remove('hidden');
+        }
+
+        function handleNoClick() {
+            document.getElementById('question').classList.add('hidden');
+            document.getElementById('dogImage').src = 'https://example.com/angry-dog.jpg'; // Replace with actual URL
+            document.getElementById('responseText').innerText = 'Noooooobody is better than Aya';
+            document.getElementById('response').classList.remove('hidden');
+        }
+
+        function handleSureClick() {
+            document.getElementById('nextText').innerText = 'Well';
+            document.querySelector('#nextStep button').innerText = 'Hm?';
+            document.querySelector('#nextStep button').setAttribute('onclick', 'handleHmClick()');
+        }
+
+        function handleHmClick() {
+            document.getElementById('nextText').innerText = 'I asked you yesterday if there is a chance you could go out with me and you said yes right?';
+            document.querySelector('#nextStep button').innerText = 'Yeah';
+            document.querySelector('#nextStep button').setAttribute('onclick', 'handleYeahClick()');
+        }
+
+        function handleYeahClick() {
+            document.getElementById('nextText').innerText = 'Did you really mean it? Cuz if I remember you said that you don\'t date';
+            document.querySelector('#nextStep button').outerHTML = '<button class="button" onclick="handleYesGoOutClick()">Yes, I do wanna go out with you</button><button class="button" onclick="handleOopsClick()">Oops, I thought it was a joke</button>';
+        }
+
+        function handleOopsClick() {
+            document.getElementById('nextText').innerText = 'Noooooo';
+            let yesButton = document.querySelector('button[onclick="handleYesGoOutClick()"]');
+            yesButton.classList.add('bigger');
+            document.querySelector('button[onclick="handleOopsClick()"]').outerHTML = '<button class="button" onclick="handlePleaaaaseClick()">Pleaaaaase</button>';
+        }
+
+        function handlePleaaaaseClick() {
+            document.getElementById('nextText').innerText = 'Pleaaaaase';
+            let yesButton = document.querySelector('button[onclick="handleYesGoOutClick()"]');
+            yesButton.classList.add('bigger');
+            document.querySelector('button[onclick="handlePleaaaaseClick()"]').outerHTML = '<button class="button" onclick="handlePleaaaaseClick()">Pleaaaaase</button>';
+        }
+
+        function handleYesGoOutClick() {
+            document.getElementById('dogImage').src = 'https://example.com/happy-puppy.jpg'; // Replace with actual URL
+            document.getElementById('responseText').innerText = 'Yayyyyy, I love you so muuuuuuch';
+            document.getElementById('nextStep').classList.add('hidden');
+        }
+    </script>
+
+</body>
+</html>
